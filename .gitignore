@@ -1,0 +1,10 @@
+# vsCode
+.vscode/
+
+# Maven build output
+target/
+*.class
+*.log
+
+# But keep the JAR file you care about
+!target/*.jar

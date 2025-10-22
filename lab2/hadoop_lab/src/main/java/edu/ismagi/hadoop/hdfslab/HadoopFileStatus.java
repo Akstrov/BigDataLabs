@@ -1,16 +1,22 @@
 package edu.ismagi.hadoop.hdfslab;
 
+import java.util.logging.Logger;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
 import org.apache.hadoop.hdfs.protocol.Block;
 
 public class HadoopFileStatus {
     public static void main(String[] args) {
+        if (args.length != 2) {
+            System.out.println("Usage: hadoop jar /shared_volume/HadoopFileStatus.jar <FILE_PATH> <NEW_FILE_NAME>");
+            System.exit(1);
+        }
         Configuration conf = new Configuration();
         FileSystem fs;
         try {
             fs = FileSystem.get(conf);
-            Path path = new Path("/user/root/input", "purchases.txt");
+            Path path = new Path(args[0]);
             FileStatus status = fs.getFileStatus(path);
             if (!fs.exists(path)) {
                 System.out.println("File does not exist");
@@ -34,7 +40,9 @@ public class HadoopFileStatus {
                 }
                 System.out.println();
             }
-            fs.rename(path, new Path("/user/root/input", "achats.txt"));
+            // Rename file
+            String newFilePath = path.getParent().toString() + Path.SEPARATOR + args[1];
+            fs.rename(path, new Path(newFilePath));
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
