@@ -43,10 +43,10 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>edu.ismagi.hadoop.hdfslab.ReadHDFS</mainClass>
+                            <mainClass>edu.ismagi.hadoop.hdfslab.HDFSWrite</mainClass>
                         </manifest>
                     </archive>
-                    <finalName>ReadHDFS</finalName>
+                    <finalName>HDFSWrite</finalName>
                 </configuration>
             </plugin>
         </plugins>
