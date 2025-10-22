@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # ==========================
   # HADOOP MASTER NODE
@@ -22,6 +20,7 @@ services:
     tty: true
     stdin_open: true
     command: sh -c "service ssh start && bash"
+    restart: always
 
 
   # ==========================
@@ -38,6 +37,7 @@ services:
     tty: true
     stdin_open: true
     command: sh -c "service ssh start && bash"
+    restart: always
 
   # ==========================
   # HADOOP SLAVE 2
@@ -53,6 +53,7 @@ services:
     tty: true
     stdin_open: true
     command: sh -c "service ssh start && bash"
+    restart: always
 
 # ==========================
 # NETWORK
