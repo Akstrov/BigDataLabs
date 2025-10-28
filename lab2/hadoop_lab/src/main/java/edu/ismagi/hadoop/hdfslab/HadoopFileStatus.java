@@ -13,6 +13,7 @@ public class HadoopFileStatus {
             System.exit(1);
         }
         Configuration conf = new Configuration();
+        conf.set("fs.defaultFS", "hdfs://localhost:9000");
         FileSystem fs;
         try {
             fs = FileSystem.get(conf);
