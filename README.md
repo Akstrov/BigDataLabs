@@ -71,6 +71,29 @@ mvn clean package
 - Understanding MapReduce paradigm
 - Text processing in distributed environment
 
+#### Lab 3 (Python Streaming example)
+
+In addition to the Java MapReduce examples, this lab includes a Python streaming implementation of the WordCount example. The Python mapper and reducer are available in `lab3_mapreduce/mapper.py` and `lab3_mapreduce/reducer.py` respectively.
+
+Notes:
+- Make sure the `mapper.py` and `reducer.py` files are accessible from the Hadoop nodes (for example by placing them in a shared volume or HDFS where the streaming job can read them).
+- Ensure `mapper.py` is executable and that `python3` is available on the nodes that run the map and reduce tasks.
+
+Example Hadoop streaming command (as used in the course):
+
+```bash
+hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.2.0.jar \
+  -files /shared_volume/mapper.py,/shared_volume/reducer.py \
+  -mapper "python3 mapper.py" \
+  -reducer "python3 reducer.py" \
+  -input ./alice.txt \
+  -output ./python_word_count
+```
+
+Replace `/shared_volume/mapper.py` and `/shared_volume/reducer.py` with the actual paths where you placed the files on your system or container. The `-files` argument makes the mapper and reducer scripts available to the tasks.
+
+The example above will read input from `./alice.txt` and write the result to `./python_word_count` in HDFS (or the working directory depending on your cluster configuration).
+
 ## Notes
 
 - Each lab builds upon concepts from previous labs
