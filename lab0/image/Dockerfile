@@ -5,8 +5,20 @@ MAINTAINER Yasser ALAMI <yassern1@gmail.com>
 WORKDIR /root
 
 # install openssh-server, openjdk vim python and wget
-RUN apt-get update && apt-get install -y --no-install-recommends openssh-server wget vim curl && \
-    apt-get install -y software-properties-common && \
+# RUN apt-get update && apt-get install -y --no-install-recommends openssh-server wget vim curl && \
+#     apt-get install -y software-properties-common && \
+#     add-apt-repository ppa:deadsnakes/ppa && \
+#     apt-get update && apt-get install -y \
+#         python3.8 python3.8-distutils python3.8-venv && \
+#     rm -rf /var/lib/apt/lists/*
+# install openssh-server, openjdk vim python and wget
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    openssh-server \
+    wget \
+    vim \
+    curl \
+    openjdk-8-jdk \
+    software-properties-common && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && apt-get install -y \
         python3.8 python3.8-distutils python3.8-venv && \

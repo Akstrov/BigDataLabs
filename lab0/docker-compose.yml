@@ -3,7 +3,8 @@ services:
   # HADOOP MASTER NODE
   # ==========================
   hadoop-master:
-    image: yassern1/hadoop-spark-jupyter:1.0.3
+    build: ./image
+    image: yassern1/hadoop-spark-jupyter:1.0.3-linux
     container_name: hadoop-master
     hostname: hadoop-master
     ports:
@@ -14,7 +15,7 @@ services:
       - "8080:8080"    # Jupyter Notebook
       - "9000:9000"    # HDFS RPC
     volumes:
-      - "C:/Users/yalam/Documents/hadoop_project:/shared_volume"
+      - "/home/akstrov/Documents/shared_volume:/shared_volume"
     networks:
       - hadoop
     tty: true
@@ -27,7 +28,8 @@ services:
   # HADOOP SLAVE 1
   # ==========================
   hadoop-slave1:
-    image: yassern1/hadoop-spark-jupyter:1.0.3
+    build: ./image
+    image: yassern1/hadoop-spark-jupyter:1.0.3-linux
     container_name: hadoop-slave1
     hostname: hadoop-slave1
     ports:
@@ -43,7 +45,8 @@ services:
   # HADOOP SLAVE 2
   # ==========================
   hadoop-slave2:
-    image: yassern1/hadoop-spark-jupyter:1.0.3
+    build: ./image
+    image: yassern1/hadoop-spark-jupyter:1.0.3-linux
     container_name: hadoop-slave2
     hostname: hadoop-slave2
     ports:
