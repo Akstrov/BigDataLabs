@@ -19,6 +19,11 @@ This repository contains hands-on laboratory work focused on distributed systems
   - Custom Mapper and Reducer implementations
   - Basic text processing with MapReduce
 
+- **lab_kafka/**: Kafka producers, consumers, and Streams examples
+  - Kafka producer and consumer examples
+  - Kafka Streams word-count example
+  - Interactive word producer/consumer
+
 ## Technologies Used
 
 - **Apache Hadoop**: Distributed storage and processing
@@ -31,28 +36,18 @@ This repository contains hands-on laboratory work focused on distributed systems
 
 ## Prerequisites
 
-- Docker and Docker Compose
+- Docker and Docker Compose (for optional local setups)
 - Java Development Kit (JDK)
 - Maven
 - Git
 
-## Setup Instructions
+## Setup
 
-1. Clone the repository
-2. Navigate to the `lab0` directory
-3. Run Docker Compose to set up the environment:
-   ```bash
-   docker-compose up -d
-   ```
+Some labs provide Docker configuration and helper scripts for local service setup; see `lab0/` for those assets.
 
-## Building and Running Projects
+## Building
 
-Each lab directory contains its own Maven project. To build a specific lab:
-
-```bash
-cd lab<number>
-mvn clean package
-```
+Each lab directory is a Maven project and can be built with `mvn clean package`.
 
 ## Lab Descriptions
 
@@ -73,26 +68,13 @@ mvn clean package
 
 #### Lab 3 (Python Streaming example)
 
-In addition to the Java MapReduce examples, this lab includes a Python streaming implementation of the WordCount example. The Python mapper and reducer are available in `lab3_mapreduce/mapper.py` and `lab3_mapreduce/reducer.py` respectively.
+This lab additionally contains a Python streaming variant of the WordCount example. The streaming mapper/reducer scripts are in `lab3_mapreduce/mapper.py` and `lab3_mapreduce/reducer.py`.
 
-Notes:
-- Make sure the `mapper.py` and `reducer.py` files are accessible from the Hadoop nodes (for example by placing them in a shared volume or HDFS where the streaming job can read them).
-- Ensure `mapper.py` is executable and that `python3` is available on the nodes that run the map and reduce tasks.
+### Lab Kafka
 
-Example Hadoop streaming command (as used in the course):
-
-```bash
-hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.2.0.jar \
-  -files /shared_volume/mapper.py,/shared_volume/reducer.py \
-  -mapper "python3 mapper.py" \
-  -reducer "python3 reducer.py" \
-  -input ./alice.txt \
-  -output ./python_word_count
-```
-
-Replace `/shared_volume/mapper.py` and `/shared_volume/reducer.py` with the actual paths where you placed the files on your system or container. The `-files` argument makes the mapper and reducer scripts available to the tasks.
-
-The example above will read input from `./alice.txt` and write the result to `./python_word_count` in HDFS (or the working directory depending on your cluster configuration).
+- Kafka producers, consumers, and a Kafka Streams word-count example.
+- Key files are located in `lab_kafka/src/main/java/edu/ismagi/kafka/`.
+- Demonstrates basic message production/consumption, interactive word streaming, and a streams-based word count.
 
 ## Notes
 
