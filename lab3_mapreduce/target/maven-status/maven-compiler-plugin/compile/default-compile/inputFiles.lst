@@ -1,0 +1,3 @@
+/home/akstrov/Documents/BigDataLabs/lab3_mapreduce/src/main/java/edu/ismagi/hadoop/mapreduce/IntSumReducer.java
+/home/akstrov/Documents/BigDataLabs/lab3_mapreduce/src/main/java/edu/ismagi/hadoop/mapreduce/TokenizerMapper.java
+/home/akstrov/Documents/BigDataLabs/lab3_mapreduce/src/main/java/edu/ismagi/hadoop/mapreduce/WordCount.java

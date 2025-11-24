@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     vim \
     curl \
-    openjdk-8-jdk \
+    openjdk-11-jdk \
     software-properties-common && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && apt-get install -y \
@@ -44,7 +44,7 @@ RUN set -eux; \
       | tar -xz -C /usr/local && mv /usr/local/hbase-1.4.12 /usr/local/hbase
  
 # set environment variables
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 
 ENV HADOOP_HOME=/usr/local/hadoop 
 ENV SPARK_HOME=/usr/local/spark
 ENV KAFKA_HOME=/usr/local/kafka
@@ -52,7 +52,7 @@ ENV HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
 ENV LD_LIBRARY_PATH=/usr/local/hadoop/lib/native:$LD_LIBRARY_PATH
 ENV HBASE_HOME=/usr/local/hbase
 ENV CLASSPATH=$CLASSPATH:/usr/local/hbase/lib/*
-ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin:/usr/local/spark/bin:/usr/local/kafka/bin:/usr/local/hbase/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/lib/jvm/java-8-openjdk-amd64/jre/bin
+ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin:/usr/local/spark/bin:/usr/local/kafka/bin:/usr/local/hbase/bin:/usr/lib/jvm/java-11-openjdk-amd64/bin:/usr/lib/jvm/java-11-openjdk-amd64/jre/bin
 
 #ENV PYSPARK_PYTHON=python3
 ENV PYTHONPATH=$SPARK_HOME/python:$PYTHONPATH 
@@ -119,5 +119,10 @@ RUN apt-get clean && \
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN /usr/local/hadoop/bin/hdfs namenode -format
+
+ADD https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/1.2.2/jakarta.activation-api-1.2.2.jar \
+    /usr/local/hadoop/share/hadoop/common/lib/
+RUN echo 'export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:/usr/local/hadoop/share/hadoop/common/lib/jakarta-activation-api-1.2.2.jar' \
+    >> /usr/local/hadoop/etc/hadoop/hadoop-env.sh
 
 CMD [ "sh", "-c", "service ssh start; bash"]
